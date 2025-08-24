@@ -8,27 +8,39 @@ class TaskRepositoryImpl implements TaskRepository{
   TaskRepositoryImpl(this._dataSource);
 
   @override
-  Future<void> addTask(Task task) {
-    // TODO: implement addTask
-    throw UnimplementedError();
+  Future<void> addTask(Task task)  async{
+     try {
+       await _dataSource.addTask(task);
+     } catch (e) {
+       throw '$e';
+     }
   }
 
   @override
-  Future<void> deleteTask(Task task) {
-    // TODO: implement deleteTask
-    throw UnimplementedError();
+  Future<void> deleteTask(Task task) async{
+    try {
+       await _dataSource.deleteTask(task);
+    } catch (e) {
+      throw '$e';
+    }
   }
 
   @override
-  Future<List<Task>> getAllTasks() {
-    // TODO: implement getAllTasks
-    throw UnimplementedError();
+  Future<List<Task>> getAllTasks()  async{
+      try {
+        return  await _dataSource.getAllTasks();
+      } catch(e) {
+        throw'$e';
+      }
   }
 
   @override
-  Future<void> updateTask(Task task) {
-    // TODO: implement updateTask
-    throw UnimplementedError();
+  Future<void> updateTask(Task task) async {
+      try {
+        await _dataSource.updateTask(task);
+      } catch (e) {
+        throw'e';
+      }
   }
   
   

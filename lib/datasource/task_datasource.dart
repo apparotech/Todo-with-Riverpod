@@ -44,6 +44,21 @@ class TaskDataSource {
     );
   }
 
+  Future<List<Task>> getAllTasks() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      AppKeys.dbTable,
+      orderBy: "id DESC",
+    );
+
+    return List.generate(
+    maps.length,
+        (index) {
+          return Task.fromJson(maps[index]);
+        }
+    );
+  }
+
   Future<int> addTask(Task task) async {
     final db = await database;
     return db.transaction((txn) async {
@@ -54,5 +69,31 @@ class TaskDataSource {
       );
     });
   }
+
+  Future<int> updateTask(Task task) async {
+    final db = await database;
+    return db.transaction((txn) async {
+      return await txn.update(
+          AppKeys.dbTable,
+          task.toJson(),
+          where: 'id = ?',
+        whereArgs: [task.id]
+
+      );
+    });
+  }
+
+    Future<int> deleteTask(Task task) async {
+    final db = await database;
+    return db.transaction(
+        (txn) async {
+          return await txn.delete(
+            AppKeys.dbTable,
+            where: 'id = ?',
+            whereArgs: [task.id]
+          );
+        }
+    );
+    }
 
 }
