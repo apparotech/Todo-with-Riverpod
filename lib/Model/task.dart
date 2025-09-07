@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import '../utils/TaskCategory.dart';
 import '../utils/task_keys.dart';
 
-class Task  {
+class Task extends Equatable  {
 
   final int id;
   final String title;
@@ -50,8 +50,38 @@ class Task  {
       isCompleted: map[TaskKeys.isCompleted] == 1 ? true : false,
     );
   }
-  
 
+  @override
+  List<Object> get props {
+    return [
+      title,
+      note,
+      category,
+      time,
+      date,
+      isCompleted,
+    ];
+  }
+
+  Task copyWith({
+    int? id,
+    String? title,
+    String? note,
+    TaskCategory? category,
+    String? time,
+    String? date,
+    bool? isCompleted,
+  }) {
+    return Task(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      note: note ?? this.note,
+      category: category ?? this.category,
+      time: time ?? this.time,
+      date: date ?? this.date,
+      isCompleted: isCompleted ?? this.isCompleted,
+    );
+  }
 
 
 }
