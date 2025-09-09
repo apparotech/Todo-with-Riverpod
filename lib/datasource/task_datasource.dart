@@ -6,9 +6,13 @@ import 'package:todo_application/utils/AppKeys.dart';
 import 'package:todo_application/utils/task_keys.dart';
 
 class TaskDataSource {
-  static final TaskDataSource _instance = TaskDataSource();
+  static final TaskDataSource _instance = TaskDataSource._();
 
   factory TaskDataSource() => _instance;
+
+  TaskDataSource._() {
+    _initDb();
+  }
 
   static Database? _database;
 

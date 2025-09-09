@@ -6,7 +6,7 @@ import '../utils/task_keys.dart';
 
 class Task extends Equatable  {
 
-  final int id;
+  final int? id;
   final String title;
   final String note;
   final TaskCategory category;
@@ -16,7 +16,7 @@ class Task extends Equatable  {
 
 
   const Task({
-    required this.id,
+     this.id,
     required this.title,
     required this.category,
     required this.time,

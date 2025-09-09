@@ -1,39 +1,30 @@
 
 import 'dart:ffi';
 
-abstract class Bank {
-  int pay(int amout);
-
-}
-
-class CreditCardPayment extends Bank{
-
-  int pay(int amout) {
-    int saveamount = 200;
-    int totalamount = saveamount +amout;
-    return totalamount;
-  }
-
-}
-
-class UPIPayment extends Bank {
-  int pay(int amout) {
-    int savedAmount = 400;
-    int totalAmount = savedAmount + amout;
-    return totalAmount;
-  }
-
-}
 
 
-void main() {
+class Employee {
+  final String name;
+  final int id;
 
-CreditCardPayment c = CreditCardPayment();
-print(c.pay(100));
-
-UPIPayment u = UPIPayment();
-print(u.pay(200));
+  Employee(this.name, this.id);
 
 
 }
 
+class Developer extends Employee {
+  final String language;
+  Developer(String name, int id, this.language) : super(name, id);
+
+
+}
+
+class FlutterDeveloper extends Developer{
+
+  final String frameWorkVersion;
+
+  FlutterDeveloper(String name, int id, String language, this.frameWorkVersion)
+    : super(name, id, language);
+
+
+}
