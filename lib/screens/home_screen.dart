@@ -14,8 +14,8 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final deviceSize = context.deviceSize;
-    final taskState = ref.watch(tasksProvider);
-    final inCompletedTasks = _incompltedTask(, ref)
+   // final taskState = ref.watch(tasksProvider);
+  //  final inCompletedTasks = _incompltedTask(, ref)
     final date = ref.watch(dateProvider);
     return Scaffold(
       body: Stack(
@@ -52,7 +52,7 @@ class HomeScreen extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        DisplayListOfTasks(tasks: _incompltedTask(tasks, ref))
+                      //  DisplayListOfTasks(tasks: _incompltedTask(tasks, ref))
                       ],
                     ),
                   )
