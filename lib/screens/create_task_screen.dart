@@ -9,6 +9,8 @@ import 'package:todo_application/provider/time_provider.dart';
 import 'package:todo_application/utils/extensions.dart';
 import 'package:todo_application/widgets/display_white_text.dart';
 
+import '../provider/task/tasks_provider.dart';
+import '../utils/AppAlert.dart';
 import '../widgets/helpers.dart';
 class CreateTaskScreen extends ConsumerStatefulWidget {
   const CreateTaskScreen({super.key});
@@ -50,15 +52,22 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
     final time = ref.watch(timeProvider);
     final date = ref.watch(dateProvider);
     final category = ref.watch(categoryProvider);
-    
-    if(title.isNotEmpty) {
+    if (title.isNotEmpty) {
       final task = Task(
         title: title,
         category: category,
         time: Helpers.timeToString(time),
         date: DateFormat.yMMMd().format(date),
         note: note,
-        isCompleted: false, );
+        isCompleted: false,
+      );
+
+      await ref.read(tasksProvider.notifier).createTask(task).then((value) {
+        AppAlerts.displaySnackbar(context, 'Task create successfully');
+      //  context.go(RouteLocation.home);
+      });
+    } else {
+      AppAlerts.displaySnackbar(context, 'Title cannot be empty');
     }
   }
 }
